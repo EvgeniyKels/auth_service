@@ -35,7 +35,7 @@ public class AuthServerConfiguration {
         RegisteredClient registeredClient =
                 RegisteredClient.withId(UUID.randomUUID().toString()).
                         clientId("articles-client").
-                        clientSecret("{noop}secret").
+                        clientSecret("secret").
                         clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC).
                         authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE).
                         authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN).
@@ -80,7 +80,7 @@ public class AuthServerConfiguration {
     @Bean
     public ProviderSettings providerSettings() {
         return ProviderSettings.builder().
-                issuer("http://auth-server:5050").
+                issuer("http://localhost:5050").
                 build();
     }
 

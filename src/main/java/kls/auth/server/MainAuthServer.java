@@ -9,4 +9,3 @@ public class MainAuthServer {
         SpringApplication.run(MainAuthServer.class, args);
     }
 }
-//https://www.baeldung.com/spring-security-oauth-auth-server

@@ -11,13 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.session.DisableEncodeUrlFilter;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -28,17 +21,6 @@ public class DefaultServerConfiguration {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
         http.
-                addFilterBefore(new OncePerRequestFilter() {
-                    @Override
-                    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-                        log.info(request.toString());
-                        filterChain.doFilter(request, response);
-                    }
-                }, DisableEncodeUrlFilter.class).
-//                    authorizeRequests().
-//                    antMatchers("/swagger-ui**").
-//                    permitAll().
-//                and().
                     authorizeRequests().
                     anyRequest().
                     authenticated().
