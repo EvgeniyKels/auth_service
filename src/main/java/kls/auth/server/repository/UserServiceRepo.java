@@ -5,6 +5,6 @@ import lombok.NonNull;
 
 public interface UserServiceRepo {
 
-    User getFullClientInfoByUserName(@NonNull String username);
+    User getFullUserInfoByUserName(@NonNull String username);
 
 }

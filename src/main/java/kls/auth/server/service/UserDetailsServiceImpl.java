@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserServiceRepo clientServiceRepo;
+    private final UserServiceRepo userServiceRepo;
 
     @Override
     public UserDetails loadUserByUsername(@NonNull String username) throws UsernameNotFoundException {
-        clientServiceRepo.getFullClientInfoByUserName(username);
+        userServiceRepo.getFullUserInfoByUserName(username);
         return null;
     }
 

@@ -16,7 +16,7 @@ public class ClientServiceRepoImpl implements UserServiceRepo {
     private final MapperRows mapperRows;
 
     @Override
-    public User getFullClientInfoByUserName(@NonNull String username) {
+    public User getFullUserInfoByUserName(@NonNull String username) {
 
         final String queryUser = "SELECT * FROM users WHERE user_name = :username";
         final SqlParameterSource mapSqlParameterSource = new MapSqlParameterSource().addValue("username", username);

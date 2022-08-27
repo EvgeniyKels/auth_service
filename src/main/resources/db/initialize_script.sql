@@ -1,8 +1,10 @@
 create database if not exists auth default character set utf8mb4 collate utf8mb4_0900_ai_ci;
 
+use auth;
+
 create table if not exists clients
 (
-    client_db_id             varchar(32)  not null
+    client_db_id             varchar(50)  not null
         primary key,
     client_id                varchar(100) not null,
     client_id_issued_at      int          not null,
@@ -25,7 +27,7 @@ create table if not exists clients
 
 create table if not exists users
 (
-    user_id                    varchar(32)   not null
+    user_id                    varchar(50)   not null
         primary key,
     user_name                  varchar(100)  not null,
     password                   varchar(100)  not null,
@@ -44,10 +46,10 @@ create table if not exists users
 
 create table if not exists additional_user_info
 (
-    user_info_id varchar(32) not null
+    user_info_id varchar(50) not null
         primary key,
-    user_id      varchar(32) not null,
-    user_email   int         null,
+    user_id      varchar(50) not null,
+    user_email   varchar(50) not null,
     client_type  varchar(50) not null,
     constraint additional_user_info_user_id_uindex
         unique (user_id),
@@ -57,3 +59,19 @@ create table if not exists additional_user_info
         foreign key (user_info_id) references users (user_id)
             on update cascade
 );
+
+set foreign_key_checks = 0;
+
+truncate users;
+truncate additional_user_info;
+
+insert into
+    users (user_id, user_name, password, is_expired, is_non_locked, is_credentials_non_expired, is_enabled, authorities)
+values ('6e83599a-263c-11ed-a261-0242ac120002', 'test_name', '$2a$10$YaXxSiw3jIBaVPygxH9Nb.EkqyLNpnfErbZOWhlcgDmrKb7wTPyoi',
+        false, false, false, true, 'authority');
+
+insert into
+    additional_user_info (user_info_id, user_id, user_email, client_type)
+values ('0f71b03e-263f-11ed-a261-0242ac120002', '6e83599a-263c-11ed-a261-0242ac120002', 'test_name@mail.com', 'full');
+
+set foreign_key_checks = 1;
